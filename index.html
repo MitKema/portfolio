@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!-- DOCTYPE le dice al navegador que esto es HTML5 (la versión moderna) -->
+
+<html lang="es">
+<!-- lang="es" ayuda a lectores de pantalla y al SEO a saber en qué idioma está la página -->
+
+<head>
+  <!-- charset: define qué caracteres puede usar el archivo (ñ, tildes, emojis...) -->
+  <meta charset="UTF-8" />
+
+  <!-- viewport: hace que la página se adapte al ancho del dispositivo (celular, tablet, etc.)
+       Sin esto, el celular muestra la página como si fuera una pantalla de escritorio. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Mateo Lema - Portfolio</title>
+
+  <!-- Google Fonts: "Inter" es la tipografía más usada en portfolios modernos.
+       Se carga antes de que se muestre la página (preconnect mejora esa velocidad). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Conecta este HTML con el archivo de estilos externo -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- NAV: barra de navegación fija en la parte superior.
+       Efecto glassmorphism: fondo semi-transparente con blur (definido en CSS). -->
+  <nav id="navbar">
+    <span class="nav-logo">Mit<span class="nav-logo-accent">Kema</span></span>
+    <ul class="nav-links">
+      <li><a href="#hero">Inicio</a></li>
+      <li><a href="#about">Sobre mí</a></li>
+      <li><a href="#skills">Habilidades</a></li>
+      <li><a href="#projects">Proyectos</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- HERO: la primera pantalla que ve el usuario.
+       Tiene fondo con puntos, glow central, y animación de entrada definida en CSS. -->
+  <section id="hero">
+
+    <!-- El pseudo-elemento ::before del #hero dibuja el glow azul de fondo.
+         El contenido del hero va acá, en z-index: 1 para estar encima del glow. -->
+    <div class="hero-content">
+
+      <!-- Saludo pequeño arriba del nombre -->
+      <p class="hero-greeting">Hola, soy</p>
+
+      <!-- El nombre usa "gradient text": la técnica background-clip: text
+           aplica un gradiente a las letras en lugar de un color sólido. -->
+      <h1 class="hero-name">Mateo Lema</h1>
+
+      <!-- Tagline en forma de "pill" (cápsula) -->
+      <p class="hero-tagline">Junior Full Stack Developer</p>
+
+      <!-- Links a redes sociales. TODO: reemplazá "#" con tu URL real.
+           Los íconos son texto (GH = GitHub, LI = LinkedIn) para no depender de librerías. -->
+      <div class="hero-social">
+        <a href="https://github.com/MitKema" class="social-link" aria-label="GitHub" target="_blank" rel="noopener">GH</a>
+      </div>
+
+      <!-- Botón principal que hace scroll a la sección "sobre mí" -->
+      <a href="#about" class="hero-cta">Conoceme más</a>
+
+    </div>
+
+    <!-- Indicador de scroll: la flecha animada en la parte inferior del hero.
+         El aria-label describe la función del link para lectores de pantalla. -->
+    <a href="#about" class="scroll-indicator" aria-label="Ir a la siguiente sección">
+      Scroll
+    </a>
+
+  </section>
+
+
+  <!-- ABOUT: sección "Sobre mí".
+       La clase "reveal" la usa JavaScript para animar la entrada al hacer scroll. -->
+  <section id="about">
+    <div class="section-container">
+      <h2 class="section-title reveal">Sobre mí</h2>
+
+      <div class="about-body reveal">
+
+        <!-- Tu foto. src apunta al archivo dentro de la carpeta imgs/ -->
+        <img
+          src="imgs/logo.jpeg"
+          alt="Foto de Mateo"
+          class="about-photo"
+        />
+
+        <div class="about-texts">
+          <!-- TODO: reemplazá estos párrafos con tu propia presentación -->
+          <p class="about-text">Hola, soy Mateo, estudiante de Desarrollo Web.</p>
+          <p class="about-text">Tengo 20 años y vivo en Uruguay.</p>
+          <p class="about-text">Me apasiona crear experiencias web innovadoras, y me interesa seguir aprendiendo.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SKILLS: tus tecnologías y herramientas. -->
+  <section id="skills">
+    <div class="section-container">
+      <h2 class="section-title reveal">Habilidades</h2>
+
+      <!-- Cada <span> es un badge de tecnología.
+           TODO: cambiá o agregá badges copiando la línea <span class="skill-badge">...</span> -->
+      <div class="skills-grid reveal">
+        <span class="skill-badge">HTML</span>
+        <span class="skill-badge">CSS</span>
+        <span class="skill-badge">JavaScript</span>
+        <span class="skill-badge">React</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- PROJECTS: tus proyectos.
+       *** TU TURNO ***: copiá el <article> de ejemplo y completá con tus proyectos. -->
+  <section id="projects">
+    <div class="section-container">
+      <h2 class="section-title reveal">Proyectos</h2>
+
+      <div class="projects-grid">
+
+        <!--
+          CARD DE EJEMPLO — tu turno:
+          1. Cambiá el emoji, título, descripción y tecnologías.
+          2. Copiá todo este bloque <article>...</article> para cada proyecto extra.
+        -->
+        <article class="project-card reveal">
+          <span class="project-icon">🌐</span>
+          <h3 class="project-title">Portfolio personal</h3>
+          <p class="project-description">
+            Mi primera página web: un portfolio construido desde cero con HTML, CSS y JavaScript.
+          </p>
+          <div class="project-techs">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">JavaScript</span>
+          </div>
+        </article>
+
+        <!-- Copiá el <article> de arriba acá para agregar más proyectos -->
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER: pie de página simple con tu nombre y el año. -->
+  <footer id="footer">
+    <div class="footer-content">
+      <p>Mateo Lema &mdash; <span class="footer-accent">2026</span></p>
+      <p class="footer-sub">
+        <a href="mailto:lemamateo2@gmail.com" class="footer-link">lemamateo2@gmail.com</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://github.com/MitKema" class="footer-link" target="_blank" rel="noopener">github.com/MitKema</a>
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- script con "defer": el navegador lo ejecuta recién cuando el HTML está
+       completamente cargado. Esto evita errores de "elemento no encontrado". -->
+  <script src="script.js" defer></script>
+
+</body>
+</html>
