@@ -1,52 +1,30 @@
-/* =====================================================
-   VARIABLES CSS (custom properties)
-
-   Definís un valor una sola vez y lo usás en todo el
-   archivo con var(--nombre). Cambiar el color de acento
-   acá lo actualiza automáticamente en todos lados.
-   ===================================================== */
 :root {
-  --color-bg:      #0d1117;   /* fondo principal (negro GitHub) */
-  --color-surface: #161b22;   /* fondo de cards y nav, un poco más claro */
-  --color-border:  #30363d;   /* bordes sutiles */
-  --color-text:    #e6edf3;   /* texto principal */
-  --color-muted:   #8b949e;   /* texto secundario */
-  --color-accent:  #58a6ff;   /* color de énfasis: links, badges, detalles */
+  --color-bg:      #0d1117;
+  --color-surface: #161b22;
+  --color-border:  #30363d;
+  --color-text:    #e6edf3;
+  --color-muted:   #8b949e;
+  --color-accent:  #58a6ff;
 
-  /* Versiones con transparencia del color de acento */
   --color-accent-glow: rgba(88, 166, 255, 0.12);
   --color-accent-mid:  rgba(88, 166, 255, 0.30);
 
   --font-main: 'Inter', 'Segoe UI', system-ui, sans-serif;
   --max-width: 900px;
 
-  /* Variables de transición para reutilizarlas en todo el archivo */
   --t-fast:   0.2s ease;
   --t-medium: 0.35s ease;
 }
 
 
-/* =====================================================
-   RESET BÁSICO
-
-   Los navegadores aplican estilos por defecto (margins,
-   paddings, tamaños de fuente). Este bloque los neutraliza
-   para tener control total del diseño desde cero.
-   ===================================================== */
 *, *::before, *::after {
-  /* border-box: el padding se cuenta DENTRO del ancho declarado.
-     Sin esto, width: 200px + padding: 20px = 240px en pantalla. */
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 
-/* =====================================================
-   BASE
-   ===================================================== */
 html {
-  /* smooth: los links #anchor desplazan la página suavemente */
   scroll-behavior: smooth;
 }
 
@@ -54,36 +32,24 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-main);
-  /* line-height: espacio entre líneas. 1.6 es más legible que el default (~1.2) */
   line-height: 1.6;
-  /* overflow-x: hidden evita que animaciones de entrada causen scroll horizontal */
   overflow-x: hidden;
 }
 
 
-/* =====================================================
-   NAVBAR — glassmorphism
-
-   "Glassmorphism": efecto de vidrio esmerilado.
-   backdrop-filter: blur() desenfoca lo que hay DETRÁS del elemento.
-   background con alpha baja le da el efecto de transparencia.
-   ===================================================== */
 #navbar {
   position: sticky;
   top: 0;
-  /* z-index: controla qué elemento se dibuja "encima".
-     100 asegura que el nav tape cualquier otro contenido */
   z-index: 100;
 
-  /* Fondo semi-transparente (0.75 de opacidad) + blur en el fondo */
   background-color: rgba(13, 17, 23, 0.75);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px); /* prefijo para Safari */
+  -webkit-backdrop-filter: blur(20px);
 
   border-bottom: 1px solid var(--color-border);
 
   display: flex;
-  justify-content: space-between; /* logo izquierda, links derecha */
+  justify-content: space-between;
   align-items: center;
   padding: 0 32px;
   height: 60px;
@@ -93,16 +59,15 @@ body {
   font-weight: 700;
   font-size: 1.1rem;
   color: var(--color-text);
-  letter-spacing: -0.02em; /* -em achica levemente el espacio entre letras */
+  letter-spacing: -0.02em;
 }
 
-/* La segunda mitad del logo ("Kema") aparece en azul */
 .nav-logo-accent {
   color: var(--color-accent);
 }
 
 .nav-links {
-  list-style: none; /* elimina los bullets de la lista */
+  list-style: none;
   display: flex;
   gap: 4px;
 }
@@ -122,20 +87,12 @@ body {
   background-color: rgba(48, 54, 61, 0.6);
 }
 
-/* .active lo agrega JavaScript cuando esa sección está visible en pantalla */
 .nav-links a.active {
   color: var(--color-accent);
   background-color: var(--color-accent-glow);
 }
 
 
-/* =====================================================
-   SCROLL REVEAL
-
-   Por defecto los elementos con clase "reveal" están
-   invisibles y bajados 24px. JavaScript los hace visibles
-   agregando la clase "visible" cuando entran en pantalla.
-   ===================================================== */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -148,20 +105,13 @@ body {
 }
 
 
-/* =====================================================
-   SECTION CONTAINER
-
-   Contenedor reutilizable que limita el ancho del
-   contenido y lo centra horizontalmente.
-   ===================================================== */
 .section-container {
   max-width: var(--max-width);
-  margin: 0 auto; /* auto en los lados horizontales centra el bloque */
+  margin: 0 auto;
   padding: 100px 24px;
 }
 
 .section-title {
-  /* clamp(mínimo, preferido, máximo): escala con el ancho de pantalla */
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
   margin-bottom: 48px;
@@ -171,8 +121,6 @@ body {
   padding-bottom: 16px;
 }
 
-/* ::after es un pseudo-elemento: existe en CSS pero no en el HTML.
-   Dibuja una línea decorativa debajo del título con un gradiente. */
 .section-title::after {
   content: '';
   position: absolute;
@@ -180,38 +128,25 @@ body {
   left: 0;
   width: 48px;
   height: 3px;
-  /* El gradiente va de azul a transparente, dando un efecto de "desvanecido" */
   background: linear-gradient(90deg, var(--color-accent), transparent);
   border-radius: 2px;
 }
 
 
-/* =====================================================
-   HERO
-
-   Técnicas modernas usadas acá:
-   1. background-image con radial-gradient(1px) → patrón de puntos
-   2. ::before con radial-gradient grande → glow azul central
-   3. ::after con radial-gradient de bg → fade en los bordes del patrón
-   4. background-clip: text → gradiente aplicado AL TEXTO del nombre
-   ===================================================== */
 #hero {
-  min-height: 100vh; /* vh = viewport height. 100vh = toda la pantalla */
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   position: relative;
-  overflow: hidden; /* evita que el glow "salga" del contenedor */
+  overflow: hidden;
 
-  /* Patrón de puntos: un radial-gradient de 1px de radio actúa como un punto.
-     background-size define la distancia entre cada punto. */
   background-color: var(--color-bg);
   background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
-/* Glow azul difuso en el centro del hero (detrás del contenido) */
 #hero::before {
   content: '';
   position: absolute;
@@ -220,15 +155,11 @@ body {
   transform: translate(-50%, -50%);
   width: 800px;
   height: 600px;
-  /* radial-gradient de color azul suave que se desvanece hacia afuera */
   background: radial-gradient(ellipse, rgba(88, 166, 255, 0.13) 0%, transparent 70%);
-  /* pointer-events: none → los clics "pasan a través" de este elemento */
   pointer-events: none;
   z-index: 0;
 }
 
-/* Fade en los bordes: oculta el patrón de puntos en las esquinas
-   para que el hero se vea más limpio y no cortado abruptamente. */
 #hero::after {
   content: '';
   position: absolute;
@@ -238,7 +169,6 @@ body {
   z-index: 0;
 }
 
-/* El contenido del hero tiene z-index: 1 para quedar ENCIMA del glow */
 .hero-content {
   display: flex;
   flex-direction: column;
@@ -249,12 +179,9 @@ body {
   position: relative;
   z-index: 1;
 
-  /* Animación de entrada: aparece desde abajo al cargar la página */
   animation: heroEntrada 0.9s ease forwards;
 }
 
-/* @keyframes define los pasos de una animación CSS.
-   'from' es el estado inicial, 'to' es el estado final. */
 @keyframes heroEntrada {
   from {
     opacity: 0;
@@ -270,22 +197,16 @@ body {
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--color-muted);
-  letter-spacing: 0.18em; /* letras más separadas dan sensación de etiqueta */
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
 .hero-name {
-  /* clamp escala el tamaño según el ancho de pantalla:
-     en celular usa 3rem, en escritorio puede llegar a 6rem. */
   font-size: clamp(3rem, 10vw, 6rem);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1;
 
-  /* "Gradient text": el gradiente se aplica como fondo del texto.
-     background-clip: text recorta el fondo a la forma de las letras.
-     -webkit-text-fill-color: transparent hace el texto "transparente"
-     para que el fondo (el gradiente) sea visible a través de él. */
   background: linear-gradient(135deg, var(--color-text) 30%, var(--color-accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -298,7 +219,7 @@ body {
   color: var(--color-accent);
   display: inline-block;
   padding: 7px 22px;
-  border-radius: 100px; /* valor muy alto = forma de "cápsula" (pill) */
+  border-radius: 100px;
   border: 1px solid rgba(88, 166, 255, 0.4);
   background-color: var(--color-accent-glow);
   letter-spacing: 0.05em;
@@ -310,7 +231,6 @@ body {
   border-color: var(--color-accent);
 }
 
-/* Links a redes sociales: dos botones cuadrados con borde */
 .hero-social {
   display: flex;
   gap: 10px;
@@ -342,7 +262,6 @@ body {
 }
 
 .hero-cta {
-  /* inline-flex + gap: permite centrar texto y un posible ícono dentro del botón */
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -351,7 +270,7 @@ body {
   border-radius: 10px;
   text-decoration: none;
   background-color: var(--color-accent);
-  color: #0d1117;    /* texto oscuro sobre fondo azul claro = buen contraste */
+  color: #0d1117;
   font-weight: 700;
   font-size: 0.95rem;
   letter-spacing: 0.01em;
@@ -360,13 +279,11 @@ body {
 }
 
 .hero-cta:hover {
-  background-color: #79b8ff; /* un tono más claro del azul */
+  background-color: #79b8ff;
   transform: translateY(-3px);
-  /* box-shadow con el color de acento crea un efecto de "brillo" debajo del botón */
   box-shadow: 0 10px 28px rgba(88, 166, 255, 0.4);
 }
 
-/* Indicador de scroll: la flecha animada en la parte inferior del hero */
 .scroll-indicator {
   position: absolute;
   bottom: 32px;
@@ -383,11 +300,9 @@ body {
   text-transform: uppercase;
   text-decoration: none;
 
-  /* animation: nombre duración timing-function iteración */
   animation: rebote 2.2s ease-in-out infinite;
 }
 
-/* La flecha ↓ se agrega con un pseudo-elemento para no contaminar el HTML */
 .scroll-indicator::after {
   content: '↓';
   font-size: 1rem;
@@ -400,9 +315,6 @@ body {
 }
 
 
-/* =====================================================
-   ABOUT
-   ===================================================== */
 #about {
   background-color: var(--color-surface);
   border-top: 1px solid var(--color-border);
@@ -415,7 +327,6 @@ body {
   gap: 48px;
 }
 
-/* En pantallas menores a 600px las columnas se apilan verticalmente */
 @media (max-width: 600px) {
   .about-body {
     flex-direction: column;
@@ -423,15 +334,13 @@ body {
   }
 }
 
-/* La foto tiene un "glow ring": borde suave iluminado con box-shadow */
 .about-photo {
   width: 160px;
   height: 160px;
-  border-radius: 50%;       /* hace la imagen perfectamente redonda */
-  object-fit: cover;         /* recorta la imagen para que llene el círculo */
+  border-radius: 50%;
+  object-fit: cover;
   border: 2px solid var(--color-accent);
-  flex-shrink: 0;            /* impide que la foto se achique en espacios reducidos */
-  /* box-shadow apilados: el primero es el "anillo", el segundo el glow difuso */
+  flex-shrink: 0;
   box-shadow:
     0 0 0 5px var(--color-accent-glow),
     0 0 36px rgba(88, 166, 255, 0.2);
@@ -445,7 +354,7 @@ body {
 }
 
 .about-texts {
-  flex: 1; /* ocupa todo el espacio restante junto a la foto */
+  flex: 1;
 }
 
 .about-text {
@@ -456,14 +365,6 @@ body {
 }
 
 
-/* =====================================================
-   SKILLS
-
-   CSS Grid con auto-fill y minmax:
-   - auto-fill: agrega columnas hasta llenar el ancho disponible
-   - minmax(130px, 1fr): cada columna mide entre 130px y lo que sobre
-   Si la pantalla es chica, entran menos columnas → se adapta solo.
-   ===================================================== */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -488,15 +389,11 @@ body {
 .skill-badge:hover {
   background-color: var(--color-accent-glow);
   border-color: var(--color-accent);
-  /* Glow suave alrededor del badge */
   box-shadow: 0 0 18px rgba(88, 166, 255, 0.22);
   transform: translateY(-2px);
 }
 
 
-/* =====================================================
-   PROJECTS
-   ===================================================== */
 #projects {
   background-color: var(--color-surface);
   border-top: 1px solid var(--color-border);
@@ -508,21 +405,17 @@ body {
   gap: 22px;
 }
 
-/* <article> es el elemento semántico correcto para contenido independiente.
-   Es mejor que un <div> porque da significado a buscadores y lectores de pantalla. */
 .project-card {
   background-color: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 14px;
   padding: 28px;
   position: relative;
-  overflow: hidden; /* evita que el ::before "salga" del borde redondeado */
+  overflow: hidden;
   transition: border-color var(--t-medium), transform var(--t-medium),
               box-shadow var(--t-medium);
 }
 
-/* Línea de gradiente en la parte superior de la card.
-   Empieza invisible (opacity: 0) y aparece al hacer hover. */
 .project-card::before {
   content: '';
   position: absolute;
@@ -568,7 +461,7 @@ body {
 
 .project-techs {
   display: flex;
-  flex-wrap: wrap; /* si no entran en una línea, saltan a la siguiente */
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -577,7 +470,7 @@ body {
   border: 1px solid var(--color-border);
   color: var(--color-muted);
   padding: 3px 12px;
-  border-radius: 20px; /* pill shape */
+  border-radius: 20px;
   font-size: 0.78rem;
   font-weight: 500;
   transition: color var(--t-fast), border-color var(--t-fast);
@@ -589,11 +482,6 @@ body {
 }
 
 
-/* =====================================================
-   FOOTER
-
-   Pie de página simple con tu nombre y el año.
-   ===================================================== */
 #footer {
   border-top: 1px solid var(--color-border);
   padding: 48px 24px;
@@ -613,7 +501,6 @@ body {
   font-size: 0.875rem;
 }
 
-/* El año y cualquier detalle destacado van en azul */
 .footer-accent {
   color: var(--color-accent);
 }
